@@ -1,0 +1,24 @@
+{
+    "telangana": {
+        "right_to_information": {
+            "fee": "₹50 for RTI application",
+            "special_provisions": "Online RTI portal available at rti.telangana.gov.in",
+            "contact": "State Information Commission, Hyderabad"
+        },
+        "consumer_rights": {
+            "forum_address": "Consumer Disputes Redressal Commission, Hyderabad",
+            "special_schemes": "Fast-track consumer grievance resolution system"
+        }
+    },
+    "tamil_nadu": {
+        "right_to_information": {
+            "fee": "₹50 for RTI application",
+            "special_provisions": "RTI applications accepted in Tamil language",
+            "contact": "State Information Commission, Chennai"
+        },
+        "consumer_rights": {
+            "forum_address": "Consumer Disputes Redressal Commission, Chennai",
+            "special_schemes": "Mobile consumer court services"
+        }
+    }
+} 

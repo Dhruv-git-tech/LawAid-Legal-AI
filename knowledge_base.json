@@ -1,0 +1,46 @@
+{
+    "right_to_information": {
+        "title": "Right to Information (RTI) Act, 2005",
+        "description": "The RTI Act allows Indian citizens to request information from any public authority.",
+        "key_points": [
+            "Any Indian citizen can file an RTI application",
+            "Application fee is ₹10 (can vary by state)",
+            "Response must be provided within 30 days",
+            "Information can be requested in any language"
+        ],
+        "process": [
+            "Draft your RTI application",
+            "Pay the application fee",
+            "Submit to the Public Information Officer",
+            "Keep a copy of your application"
+        ],
+        "required_documents": [
+            "RTI application form",
+            "Fee payment proof",
+            "Identity proof"
+        ],
+        "source": "indiacode.nic.in"
+    },
+    "consumer_rights": {
+        "title": "Consumer Protection Act, 2019",
+        "description": "Protects consumer rights and provides mechanisms for redressal of consumer disputes.",
+        "key_points": [
+            "Right to be protected against unfair trade practices",
+            "Right to be informed about product quality and price",
+            "Right to choose from various products",
+            "Right to be heard in consumer forums"
+        ],
+        "process": [
+            "File a complaint with the Consumer Forum",
+            "Pay the required fee",
+            "Attend hearings",
+            "Receive the order"
+        ],
+        "required_documents": [
+            "Purchase proof",
+            "Complaint details",
+            "Supporting documents"
+        ],
+        "source": "consumeraffairs.nic.in"
+    }
+} 
