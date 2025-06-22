@@ -26,7 +26,7 @@ A modern, open-source legal assistant web app powered by Hugging Face open model
 3. **Add your Hugging Face API key:**
    - Create a file `.streamlit/secrets.toml` with:
      ```toml
-     HF_API_KEY = ""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" "
+     HF_API_KEY = "your_huggingface_api_key"
      ```
    - [Get your free API key here](https://huggingface.co/settings/tokens)
 
