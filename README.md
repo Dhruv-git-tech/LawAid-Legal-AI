@@ -5,13 +5,11 @@ A modern, open-source legal assistant web app powered by Hugging Face open model
 ## Features
 - 100% Streamlit frontend (modern chat UI)
 - Uses only open, public models (no paid access required)
-- Automatic fallback to a second model if the first is unavailable
 - Sidebar for model config, info, and legal links
 - Chat history, error handling, and clear feedback
 
 ## Models Used
-- **Primary:** `google/gemma-7b-it`
-- **Fallback:** `HuggingFaceH4/zephyr-7b-beta`
+- **Primary:** `HuggingFaceH4/zephyr-7b-beta`
 
 ## Setup
 1. **Clone this repo:**
