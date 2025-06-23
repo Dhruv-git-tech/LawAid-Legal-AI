@@ -5,13 +5,8 @@ import PyPDF2
 # --- CONFIGURATION ---
 st.set_page_config(page_title="LawAid - Best Legal AI", page_icon="⚖️", layout="wide")
 
-HF_API_KEY = st.secrets.get("HF_API_KEY"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 "")  # <-- Securely load your HF key
+HF_API_KEY = st.secrets.get("HF_API_KEY", "")  # Securely load your HF key
 PRIMARY_MODEL_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
-SYSTEM_PROMPT = (
-    "You must provide highly accurate, lawful, respectful answers based only on Indian law. "
-    "Avoid hallucination. If unsure, say so. Do not offer personal opinions."
-)
-
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}", "Content-Type": "application/json"}
 
 # --- CHAT MEMORY ---
@@ -21,10 +16,8 @@ if "messages" not in st.session_state:
 # --- FUNCTIONS ---
 def generate_response(prompt):
     if not HF_API_KEY:
-        return "❌ API key not set. Please add it in `.streamlit/secrets.toml`."
-
+        return "❌ API key not set. Please add it in .streamlit/secrets.toml."
     payload = {"inputs": prompt}
-
     try:
         res = requests.post(PRIMARY_MODEL_URL, headers=HEADERS, json=payload, timeout=60)
         res.raise_for_status()
@@ -36,6 +29,10 @@ def generate_response(prompt):
             return output.get("generated_text", "⚠️ Unexpected response format.").strip()
         else:
             return "⚠️ Unexpected response format."
+    except requests.exceptions.HTTPError as e:
+        if res.status_code == 401:
+            return "❌ Unauthorized: Check your Hugging Face API key and model permissions."
+        return f"⚠️ HTTP Error: {e}"
     except Exception as e:
         return f"⚠️ Error: {e}"
 
@@ -60,22 +57,24 @@ user_input = st.chat_input("Ask your legal question or upload a file for analysi
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.spinner("LawAid is thinking..."):
-        full_prompt = user_input
-        reply = generate_response(full_prompt)
+        reply = generate_response(user_input)
     st.session_state.messages.append({"role": "assistant", "content": f"```markdown\n{reply}\n```"})
     st.rerun()
 
-# Add file uploader to the UI
+# --- FILE UPLOAD ---
 uploaded_file = st.file_uploader("Upload a case file (PDF or TXT)", type=["pdf", "txt"])
 if uploaded_file is not None:
-    if uploaded_file.type == "application/pdf":
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        file_text = "\n".join([page.extract_text() for page in pdf_reader.pages if page.extract_text()])
-    else:
-        file_text = uploaded_file.read().decode("utf-8")
-    with st.spinner("Analyzing your case file..."):
-        reply = generate_response(file_text + "\n\nPlease provide detailed legal suggestions based on this case file.")
-    st.markdown(f"```markdown\n{reply}\n```")
+    try:
+        if uploaded_file.type == "application/pdf":
+            pdf_reader = PyPDF2.PdfReader(uploaded_file)
+            file_text = "\n".join([page.extract_text() for page in pdf_reader.pages if page.extract_text()])
+        else:
+            file_text = uploaded_file.read().decode("utf-8")
+        with st.spinner("Analyzing your case file..."):
+            reply = generate_response(file_text)
+        st.markdown(f"```markdown\n{reply}\n```")
+    except Exception as e:
+        st.error(f"Error reading file: {e}")
 
 # --- DISCLAIMER ---
 st.markdown("---")
