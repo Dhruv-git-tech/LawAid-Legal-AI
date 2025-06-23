@@ -8,11 +8,6 @@ st.set_page_config(page_title="LawAid - Best Legal AI", page_icon="⚖️", layo
 PRIMARY_MODEL_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
 HF_API_KEY = "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"  # Updated Token
 
-SYSTEM_PROMPT = (
-    "You must provide highly accurate, lawful, respectful answers based only on Indian law. "
-    "Avoid hallucination. If unsure, say so. Do not offer personal opinions."
-)
-
 HEADERS = {"Authorization": f"Bearer {HF_API_KEY}", "Content-Type": "application/json"}
 
 # --- CHAT MEMORY ---
@@ -75,7 +70,7 @@ if uploaded_file is not None:
     else:
         file_text = uploaded_file.read().decode("utf-8")
     with st.spinner("Analyzing your case file..."):
-        reply = generate_response(file_text + "\n\nPlease provide detailed legal suggestions based on this case file.")
+        reply = generate_response(file_text)
     st.markdown(f"```markdown\n{reply}\n```")
 
 # --- DISCLAIMER ---
