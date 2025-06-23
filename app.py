@@ -6,8 +6,6 @@ import PyPDF2
 st.set_page_config(page_title="LawAid - Best Legal AI", page_icon="⚖️", layout="wide")
 
 PRIMARY_MODEL_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
-HF_API_KEY = "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"  # Updated Token
-
 SYSTEM_PROMPT = (
     "You must provide highly accurate, lawful, respectful answers based only on Indian law. "
     "Avoid hallucination. If unsure, say so. Do not offer personal opinions."
