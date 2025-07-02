@@ -2,8 +2,8 @@ import streamlit as st
 st.set_page_config(page_title="LawAid - Best Legal AI", page_icon="⚖️", layout="wide")
 import requests
 import PyPDF2
+from serpapi import GoogleSearch
 from transformers import pipeline
-import serpapi
 
 # --- CUSTOM CSS FOR LEGAL-THEMED, BLACK BACKGROUND UI ---
 legal_black_css = '''
@@ -160,7 +160,8 @@ def serpapi_legal_search(query, serpapi_key):
         "num": 8
     }
     try:
-        results = serpapi.search(params)
+        search = GoogleSearch(params)
+        results = search.get_dict()
         if "organic_results" in results and results["organic_results"]:
             snippets = []
             link = None
